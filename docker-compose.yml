@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  ccslistener:
+    container_name: ccslistener
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    volumes:
+      - /root/.docker:/root/.docker
+    ports:
+      - 8886:8886
+    restart: always

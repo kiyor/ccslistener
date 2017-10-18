@@ -6,7 +6,7 @@
 
 * Creation Date : 10-02-2017
 
-* Last Modified : Mon 02 Oct 2017 08:14:12 PM UTC
+* Last Modified : Wed 18 Oct 2017 08:07:13 PM UTC
 
 * Created By : Kiyor
 
@@ -25,7 +25,7 @@ import (
 	"os/exec"
 )
 
-var listen *string = flag.String("l", ":8887", "listen interface")
+var listen *string = flag.String("l", ":8886", "listen interface")
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	for k, v := range r.Header {
@@ -43,7 +43,7 @@ func handlerDockerhub(w http.ResponseWriter, r *http.Request) {
 	local := r.URL.Query().Get("local")
 	remote := r.URL.Query().Get("remote")
 	go func(local, remote string) {
-		cmd := fmt.Sprintf("sudo docker pull %s && sudo docker tag %s %s && sudo docker push %s", local, local, remote, remote)
+		cmd := fmt.Sprintf("docker pull %s && docker tag %s %s && docker push %s", local, local, remote, remote)
 		c := exec.Command("/bin/sh", "-c", cmd)
 		c.Stdout = os.Stdout
 		c.Stderr = os.Stderr
